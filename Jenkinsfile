@@ -20,7 +20,7 @@ node {
      sh 'cp dev-env/server.xml deploy/'
      sh 'cp dev-env/tomcat.Dockerfile deploy/'
     sh 'ls '
-    sh 'cp target/AIISDateValidater.war deploy/AIISDateValidater.war'
+    sh 'cp target/AIISDataValidater.war deploy/AIISDataValidater.war'
     dir('deploy') {
       stash 'copy2docker'
     }  
