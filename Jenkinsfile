@@ -31,11 +31,11 @@ node ('docker'){
     deleteDir()
     unstash 'copy2docker'
     sh 'docker ps'
-    sh 'docker ps|grep tcDV4dev >/dev/null 2>/dev/null||echo "noting"'
-    sh 'docker ps|grep tcDV4dev >/dev/null 2>/dev/null&&docker stop tcDV4dev||echo "noting"'
-    sh 'docker ps -a|grep tcDV4dev >/dev/null 2>/dev/null&&docker rm tcDV4dev||echo "noting"'
-    sh 'docker images|grep tcDV4devimage >/dev/null 2>/dev/null&&docker rmi tcDV4devimage||echo "noting"'
-    sh 'docker build -f tomcat.Dockerfile . -t tcDV4devimage'
-    sh 'docker run --name tcDV4dev --restart=on-failure -p 192.168.0.1:8100:8009 -d tcDV4devimage  '
+    sh 'docker ps|grep tcdv4dev >/dev/null 2>/dev/null||echo "noting"'
+    sh 'docker ps|grep tcdv4dev >/dev/null 2>/dev/null&&docker stop tcdv4dev||echo "noting"'
+    sh 'docker ps -a|grep tcdv4dev >/dev/null 2>/dev/null&&docker rm tcdv4dev||echo "noting"'
+    sh 'docker images|grep tcdv4devimage >/dev/null 2>/dev/null&&docker rmi tcdv4devimage||echo "noting"'
+    sh 'docker build -f tomcat.Dockerfile . -t tcdv4devimage'
+    sh 'docker run --name tcdv4dev --restart=on-failure -p 192.168.0.1:8100:8009 -d tcdv4devimage  '
   }  
 }
