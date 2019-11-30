@@ -33,7 +33,7 @@ public class MeterDataValidater extends Thread{
         Connection con=null;
         Statement st=null;
        try{
-           logger.addlog4meter("начало сканирования ",meter_name);
+//           logger.addlog4meter("начало сканирования ",meter_name);
         con=dbpool.getPoolConnection();
 //        List<Long> dates=getDates(con);
         data_begin=getLastCorrectDate(con);
