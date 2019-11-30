@@ -29,6 +29,7 @@ boolean ok=true;
             logger.addlog("for "+mes.size()+" counters");
              for (Measure measure : mes) {
                  logger.addlog("Validater run 1");
+                 logger.addlog("measure="+(measure==null?"null":measure.name));
                  if (!ok) break;
                  logger.addlog("Validater run 2");
                  Long mi=dbpool.getMeter("666", "3");
@@ -39,6 +40,8 @@ boolean ok=true;
                  logger.addlog("Validater run 5");
                  mv.start();}
                  logger.addlog("Validater run 6");
+                 logger.addlog("mi="+mi);
+                 logger.addlog("mi="+mi);
                  if ((mi!=null)||(measure.id!=mi))
                      new MeterDataValidater(measure.id, measure.name).start();
                  logger.addlog("Validater run 7");
