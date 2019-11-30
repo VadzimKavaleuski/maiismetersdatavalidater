@@ -1,19 +1,20 @@
 package ru.spb.snt.aiis.DataValidater;
 import java.io.File;
-import java.util.Iterator;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.HierarchicalINIConfiguration;
 public class ConfigINI extends HierarchicalINIConfiguration {
 
     public ConfigINI() throws ConfigurationException {
         super(new File("conf/aiis-datavalidater"));
+        setAutoSave(true);
 //        logger.addlog("ConfigINI 1");
 //                for (Iterator<String> is =this.getKeys(); is.hasNext();) {
 //            String object = is.next();
 //             logger.addlog(object);
 //        }
 //         logger.addlog("ConfigINI 2");
-        SetDataInit(System.currentTimeMillis());
+//        SetDataInit(System.currentTimeMillis());
+SetDataInit(-1);
     }
 public String getMySqlUser(){
 //    logger.addlog("getMySqlUser "+getSection("MySql").getString("User"));        
@@ -44,7 +45,7 @@ public void SetDataInit(long val){
         logger.addlog("TimeInit="+val);
         getSection("Test").setProperty("TimeInit", val);
     
-        this.save();// NodeList("CarPosition");
+//        this.save();// NodeList("CarPosition");
     } catch (Exception e) {logger.addlog("ConfigINI write TimeInit error: "+e);}
 }
 
