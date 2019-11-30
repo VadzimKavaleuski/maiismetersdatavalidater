@@ -4,3 +4,5 @@ Url=jdbc:mysql://192.168.0.200/aiis
 Urlutc=jdbc:mysql://192.168.0.200/aiis?useTimezone=false
 User = aiis-datavalidater-login
 Password = aiis-datavalidater-password
+[Test]
+TimeInit = 0

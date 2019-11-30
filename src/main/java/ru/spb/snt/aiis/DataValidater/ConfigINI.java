@@ -41,9 +41,11 @@ public int getPort(){
     return getSection("main").getInt("Port");}
 public void SetDataInit(long val){
     try {
-    getSection("Test").setProperty("TimeInit", val);
+        logger.addlog("TimeInit="+val);
+        getSection("Test").setProperty("TimeInit", val);
+    
         this.save();// NodeList("CarPosition");
-    } catch (Exception e) {logger.addlog("ConfigINI ошибка записи: "+e);}
+    } catch (Exception e) {logger.addlog("ConfigINI write TimeInit error: "+e);}
 }
 
 
