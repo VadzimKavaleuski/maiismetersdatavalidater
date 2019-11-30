@@ -14,7 +14,7 @@ public class ConfigINI extends HierarchicalINIConfiguration {
 //        }
 //         logger.addlog("ConfigINI 2");
 //        SetDataInit(System.currentTimeMillis());
-SetDataInit(-1);
+//SetDataInit(-1);
     }
 public String getMySqlUser(){
 //    logger.addlog("getMySqlUser "+getSection("MySql").getString("User"));        
@@ -40,14 +40,14 @@ public String getMySqlUrl(){
     return getSection("MySql").getString("Url","jdbc:mysql://127.0.0.1/aiis");}
 public int getPort(){
     return getSection("main").getInt("Port");}
-public void SetDataInit(long val){
-    try {
-        logger.addlog("TimeInit="+val);
-        getSection("Test").setProperty("TimeInit", val);
-    
-//        this.save();// NodeList("CarPosition");
-    } catch (Exception e) {logger.addlog("ConfigINI write TimeInit error: "+e);}
-}
+//public void SetDataInit(long val){
+//    try {
+//        logger.addlog("TimeInit="+val);
+//        getSection("Test").setProperty("TimeInit", val);
+//    
+////        this.save();// NodeList("CarPosition");
+//    } catch (Exception e) {logger.addlog("ConfigINI write TimeInit error: "+e);}
+//}
 
 
 }

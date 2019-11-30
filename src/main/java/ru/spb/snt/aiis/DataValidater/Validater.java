@@ -32,17 +32,16 @@ boolean ok=true;
                  logger.addlog("measure="+(measure==null?"null":measure.name));
                  if (!ok) break;
                  logger.addlog("Validater run 2");
-                 Long mi=dbpool.getMeter("666", "3");
+//                 Long mi=dbpool.getMeter("666", "3");
                  logger.addlog("cheking meter "+measure.name);
-                if ((mi!=null)&&((mv ==null)||(!mv.running))){
+//                if ((mi!=null)&&((mv ==null)||(!mv.running))){
                  logger.addlog("Validater run 4");
-                 mv=new MeterDataValidater(mi, "eeee");
+//                 mv=new MeterDataValidater(mi, "eeee");
                  logger.addlog("Validater run 5");
-                 mv.start();}
+//                 mv.start();}
                  logger.addlog("Validater run 6");
-                 logger.addlog("mi="+mi);
-                 logger.addlog("mi="+mi);
-                 if ((mi!=null)||(measure.id!=mi))
+//                 logger.addlog("mi="+mi);
+//                 if ((mi!=null)||(measure.id!=mi))
                      new MeterDataValidater(measure.id, measure.name).start();
                  logger.addlog("Validater run 7");
                  sleep(22*60*60*1000/mes.size());
