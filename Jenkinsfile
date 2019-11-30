@@ -3,7 +3,6 @@ node {
     deleteDir()
     git credentialsId: 'a29845c7-b29e-44ce-ab58-515727dba9ef',
         url:'https://VadimKA1975@bitbucket.org/VadimKA1975/maiisdatavalidater.git',
-        branch: 'develop'
   }
   stage('Build') {
     sh 'mvn  clean install'
