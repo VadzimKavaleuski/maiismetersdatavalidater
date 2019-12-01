@@ -26,7 +26,7 @@ boolean ok=true;
 //                 new MeterDataValidater(6316, "63006431 Временно").start();
             dbpool.init(new ConfigINI());
             List<Measure> mes=loadMeasures(); 
-            logger.addlog("for "+mes.size()+" counters");
+//            logger.addlog("for "+mes.size()+" counters");
              for (Measure measure : mes) {
 //                 logger.addlog("Validater run 1");
                  logger.addlog("measure="+(measure==null?"null":measure.name));
@@ -70,7 +70,9 @@ boolean ok=true;
 //                + " left join aiis.iik_state iis on iis.iik_id=m.id");
         ResultSet rst=st.executeQuery("select m.id,m.nomer,iis.last_correct_date from aiis.meters m "
                 + " left join aiis.iik_state iis on iis.iik_id=m.id"
-                + " where m.deleted is null or m.deleted>"+(System.currentTimeMillis()-2*30*24*60*60*1000));
+                + " where iis.last_correct_date < iis.last_packet_dt "
+                + " and iis.last_packet_dt>"+(System.currentTimeMillis()-2*30*24*60*60*1000)
+                + " and( m.deleted is null or m.deleted>"+(System.currentTimeMillis()-2*30*24*60*60*1000)+")");
 //        logger.addlog4debug("Validater", "after sql execute");
 
         while (rst.next())res.add(new Measure(rst.getLong(1), rst.getString(2), rst.getLong(3)));
