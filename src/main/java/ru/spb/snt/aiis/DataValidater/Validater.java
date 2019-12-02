@@ -70,8 +70,8 @@ boolean ok=true;
 //                + " left join aiis.iik_state iis on iis.iik_id=m.id");
         ResultSet rst=st.executeQuery("select m.id,m.nomer,iis.last_correct_date from aiis.meters m "
                 + " left join aiis.iik_state iis on iis.iik_id=m.id"
-                + " where iis.last_correct_date < iis.last_packet_dt "
-                + " and iis.last_packet_dt>"+(System.currentTimeMillis()-2*30*24*60*60*1000)
+                + " where iis.last_correct_date < iis.last_paket_dt "
+                + " and iis.last_paket_dt>"+(System.currentTimeMillis()-2*30*24*60*60*1000)
                 + " and( m.deleted is null or m.deleted>"+(System.currentTimeMillis()-2*30*24*60*60*1000)+")");
 //        logger.addlog4debug("Validater", "after sql execute");
 
