@@ -58,7 +58,7 @@ public class MeterDataValidater extends Thread{
 //        logger.addlog("проверка "+meter_name+" период c "+data_begin+" по "+rst.getLong(1));
 //            if ((rst.getLong(1)-data_begin)>(24*60*60*1000)){
 //           logger.addlog4meter("разница "+(rst.getLong(1)-data_begin),meter_name);
-            if ((rst.getLong(1)-data_begin)>(30*60*1000)){
+            if ((rst.getLong(1)-data_begin)>(30*60*1000*1.5)){
 //           logger.addlog4meter("добавление дыры ",meter_name);
                    //sendRequest4(data_begin/1000+1,date2/1000-1,con);
                    dataHoles.add(new DataHole(data_begin+1000, rst.getLong(1)-1000,meter_id,0,0));
