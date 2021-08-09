@@ -50,8 +50,8 @@ spec:
     - sleep
     args:
     - 9999999
-  - env:
-    - name: tagName
+    envVar:
+    - key: tagName
       value: ${env.BRANCH_NAME}
 """
   ) {
