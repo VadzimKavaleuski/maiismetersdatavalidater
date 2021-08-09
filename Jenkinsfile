@@ -62,6 +62,8 @@ spec:
             container('kaniko') {
                 stage('Build a Maven project') {
                     sh 'ls -la'
+                    echo '${tagName}'
+                    echo '$tagName'
                     sh '/kaniko/executor --context . --dockerfile tomcat.Dockerfile --destination kube-registry-nodeport.registry.svc.cluster.local:5000/aiismetersdatavalidator:${tagName}'
                 }
             }
