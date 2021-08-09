@@ -38,7 +38,7 @@ node {
 //     sh 'docker build -f tomcat.Dockerfile . -t tcdv4devimage'
 //     sh 'docker run --name tcdv4dev --restart=on-failure -p 192.168.0.1:8110:8009 -d tcdv4devimage  '
 //   }  
-
+// }
   podTemplate(yaml: """
 kind: Pod
 spec:
@@ -70,4 +70,4 @@ spec:
  }
 
   
-}
+
