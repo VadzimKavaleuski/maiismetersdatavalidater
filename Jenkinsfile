@@ -26,16 +26,48 @@ node {
     }  
   }  
 }  
-node ('docker'){   
-  stage('deploy') {
-    deleteDir()
-    unstash 'copy2docker'
-    sh 'docker ps'
-    sh 'docker ps|grep tcdv4dev >/dev/null 2>/dev/null||echo "noting"'
-    sh 'docker ps|grep tcdv4dev >/dev/null 2>/dev/null&&docker stop tcdv4dev||echo "noting"'
-    sh 'docker ps -a|grep tcdv4dev >/dev/null 2>/dev/null&&docker rm tcdv4dev||echo "noting"'
-    sh 'docker images|grep tcdv4devimage >/dev/null 2>/dev/null&&docker rmi tcdv4devimage||echo "noting"'
-    sh 'docker build -f tomcat.Dockerfile . -t tcdv4devimage'
-    sh 'docker run --name tcdv4dev --restart=on-failure -p 192.168.0.1:8110:8009 -d tcdv4devimage  '
-  }  
+// node ('docker'){   
+//   stage('deploy') {
+//     deleteDir()
+//     unstash 'copy2docker'
+//     sh 'docker ps'
+//     sh 'docker ps|grep tcdv4dev >/dev/null 2>/dev/null||echo "noting"'
+//     sh 'docker ps|grep tcdv4dev >/dev/null 2>/dev/null&&docker stop tcdv4dev||echo "noting"'
+//     sh 'docker ps -a|grep tcdv4dev >/dev/null 2>/dev/null&&docker rm tcdv4dev||echo "noting"'
+//     sh 'docker images|grep tcdv4devimage >/dev/null 2>/dev/null&&docker rmi tcdv4devimage||echo "noting"'
+//     sh 'docker build -f tomcat.Dockerfile . -t tcdv4devimage'
+//     sh 'docker run --name tcdv4dev --restart=on-failure -p 192.168.0.1:8110:8009 -d tcdv4devimage  '
+//   }  
+
+  podTemplate(yaml: """
+kind: Pod
+spec:
+  containers:
+  - name: kaniko
+    image: gcr.io/kaniko-project/executor:debug
+    imagePullPolicy: Always
+    command:
+    - sleep
+    args:
+    - 9999999
+    env:
+    - name: tagName
+      value: ${env.BRANCH_NAME}
+"""
+  ) {
+
+    node(POD_LABEL) {
+        stage('build docker image') {
+            unstash 'copy2docker'
+            container('kaniko') {
+                stage('Build a Maven project') {
+                    sh 'ls -la'
+                    sh '/kaniko/executor --context . --dockerfile tomcat.Dockerfile --destination kube-registry-nodeport.registry.svc.cluster.local:5000/aiismetersdatavalidator:${tagName}'
+                }
+            }
+        }
+    }
+ }
+
+  
 }
