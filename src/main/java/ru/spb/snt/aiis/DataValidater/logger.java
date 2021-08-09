@@ -16,9 +16,10 @@ public final class logger {
         //fmt.close();
         try{
 //            ofs=new FileOutputStream("aiis-datavalidater "+dffn.format(System.currentTimeMillis()).toString(),true);
-        String dir="logs/aiis-datavalidater";
-            FileUtils.forceMkdir(new File(dir));
-            ofs=new FileOutputStream("logs/aiis-datavalidater/"+dffn.format(System.currentTimeMillis()).toString(),true);
+        // String dir="logs/aiis-datavalidater";
+            // FileUtils.forceMkdir(new File(dir));
+            // ofs=new FileOutputStream("logs/aiis-datavalidater/"+dffn.format(System.currentTimeMillis()).toString(),true);
+            ofs=out;
             ofs.write(os.getBytes());
             ofs.write(ns);
             ofs.close();
