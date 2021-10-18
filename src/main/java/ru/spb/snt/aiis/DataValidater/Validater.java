@@ -71,8 +71,9 @@ boolean ok=true;
     st=con.createStatement();
         ResultSet rst=st.executeQuery("select m.id,m.nomer,iis.last_correct_date from aiisdatavalidator.meters m "
                 + " left join aiisdatavalidator.iik_state iis on iis.iik_id=m.id"
-                + " where iis.last_correct_date < iis.last_paket_dt "
-                + " and iis.last_paket_dt>"+(System.currentTimeMillis()-2*30*24*60*60*1000)
+                + " left join aiisdatavalidator.aiis_iik_state aiis_iis on aiis_iis.iik_id=m.id"
+                + " where iis.last_correct_date < aiis_iis.last_paket_dt "
+                + " and aiis_iis.last_paket_dt>"+(System.currentTimeMillis()-2*30*24*60*60*1000)
                 + " and( m.deleted is null or m.deleted>"+(System.currentTimeMillis()-2*30*24*60*60*1000)+")");
 
         while (rst.next())res.add(new Measure(rst.getLong(1), rst.getString(2), rst.getLong(3)));
