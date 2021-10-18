@@ -4,10 +4,7 @@
  */
 package ru.spb.snt.aiis.DataValidater;
 
-/**
- *
- * @author vadim
- */
+
 public class Measure {
     long id;
     String name;

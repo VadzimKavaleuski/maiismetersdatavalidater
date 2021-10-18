@@ -22,28 +22,21 @@ public class DataHole {
     public void insertIfNeed(Connection con){
         try {
             Statement st=con.createStatement();
-//            logger.addlog4debug("DataHole iik_id"+iik_id,"befor sql execute"+"select count(*) from aiis.iik_data_hole dh "
-//                    + " where (destroy is null)"
-//                    + " and (iik_id="+iik_id+")"
-//                    + " and (dh.begin<="+from+") and (dh.end>="+to+")");
-            ResultSet rst=st.executeQuery("select count(*) from aiis.iik_data_hole dh "
+            ResultSet rst=st.executeQuery("select count(*) from aiisdatavalidator.iik_data_hole dh "
                     + " where "
                         + "("
-        //                    + "(destroy is null) or "
                             + "(state!=64)"
                         + ")"
                         + " and "
                         + "(iik_id="+iik_id+")"
                         + " and (dh.begin<="+from+") and (dh.end>="+to+")");
-//            logger.addlog4debug("DataHole iik_id"+iik_id, "after sql execute");
             int c=0;
             if (rst.next())c=rst.getInt(1);
             rst.close();
             if (c==0){
-             st.executeUpdate("insert into aiis.iik_data_hole (iik_id,begin,end,state)"
+             st.executeUpdate("insert into aiisdatavalidator.iik_data_hole (iik_id,begin,end,state)"
                      + " values ("+iik_id+","+from+","+to+","+state+")");
             }
-//            logger.addlog4debug("DataHole iik_id"+iik_id, "after sql fetch");
             st.close();
         } catch (Exception e) {logger.addlog("DataHole insertIfNeed err "+e.toString() +"query "+"insert into aiis.iik_data_hole (iik_id,begin,end,state)"
                      + " values ("+iik_id+","+from+","+to+","+state+")");
@@ -51,21 +44,12 @@ public class DataHole {
     }
     private void destroy(Connection con){
         try {
-//            logger.addlog("destroy4 "+iik_id);
             Statement st=con.createStatement();
-            String query="delete from aiis.iik_data_hole "
-//                    + " set "
-//                    + " destroy="+System.currentTimeMillis()+","
-//                    + " state="+state
+            String query="delete from aiisdatavalidator.iik_data_hole "
                      + " where (iik_id="+iik_id+") and (begin="+from+")and(end="+to+")";
-//                     + " where (destroy is null)and(iik_id="+iik_id+") and (begin="+from+")and(end="+to+")";
             st.executeUpdate(query);
             st.close();
-//            st.executeUpdate("update aiis.iik_data_hole set "
-//                    + " destroy="+System.currentTimeMillis()+","
-//                    + " state="+state
-//                     + " where (destroy is null)and(iik_id="+iik_id+") and (begin="+from+")and(end="+to+")");
-//            st.close();
+
         } catch (Exception e) {logger.addlog("DataHole destroy err "+e.toString());
         }
     }

@@ -53,7 +53,7 @@ public class MeterDataValidater extends Thread{
         st=con.createStatement();
 //        logger.addlog4debug("meterDataValidater meter_name="+meter_name, "befor sql execute"+"select dt from aiis.iik_pakets where (dt>"+data_begin+") and (dt<"+(System.currentTimeMillis()-3*60*60*1000)+") and (iik_id="+meter_id+") order by dt limit 0,100");
 //           logger.addlog4meter("select dt from aiis.iik_pakets where (dt>"+data_begin+") and (dt<"+(System.currentTimeMillis()-(long)2*60*60*1000)+") and (iik_id="+meter_id+") order by dt "/*limit 0,5000"*/,meter_name);
-        ResultSet rst=st.executeQuery("select dt from aiis.iik_pakets where (dt>"+data_begin+") and (dt<"+(System.currentTimeMillis()-(long)2*60*60*1000)+") and (iik_id="+meter_id+") order by dt" /*limit 0,5000"*/);
+        ResultSet rst=st.executeQuery("select dt from aiisdatavalidator.iik_pakets where (dt>"+data_begin+") and (dt<"+(System.currentTimeMillis()-(long)2*60*60*1000)+") and (iik_id="+meter_id+") order by dt" /*limit 0,5000"*/);
         while (rst.next()){
 //        logger.addlog("проверка "+meter_name+" период c "+data_begin+" по "+rst.getLong(1));
 //            if ((rst.getLong(1)-data_begin)>(24*60*60*1000)){
@@ -162,9 +162,9 @@ running=false;
 //     logger.addlog4meter("loadDataHoles start", meter_name);
 //     owner_uspd=new Vector<Long>();
      String query="select dh.begin,dh.end,dh.state"
-             + ",(select COUNT(p.id) cp from aiis.iik_pakets p where (p.iik_id="+meter_id+") AND (p.dt>dh.begin) AND (p.dt<dh.end) ) cp "
+             + ",(select COUNT(p.id) cp from aiisdatavalidator.iik_pakets p where (p.iik_id="+meter_id+") AND (p.dt>dh.begin) AND (p.dt<dh.end) ) cp "
 //             + ",count(p.id) "
-             + "from aiis.iik_data_hole dh"
+             + "from aiisdatavalidator.iik_data_hole dh"
 //                + " left join aiis.iik_pakets p on (p.iik_id="+meter_id+") and (p.dt>dh.begin) and (p.dt<dh.end) "
                 + " where (dh.destroy is null) and (dh.iik_id="+meter_id+")"
 //             + " group by dh.begin,dh.end,dh.state"
@@ -208,7 +208,7 @@ running=false;
       try{ 
 //        logger.addlog("update aiis.iik_state set last_correct_date="+last_correct_date+" where iik_id="+meter_id);  
         Statement st=con.createStatement();
-        st.executeUpdate("update aiis.iik_state set last_correct_date="+last_correct_date+" where iik_id="+meter_id);
+        st.executeUpdate("update aiisdatavalidator.iik_state set last_correct_date="+last_correct_date+" where iik_id="+meter_id);
         st.close();
        }catch(Exception e){logger.addlog("MeterDataValidater saveLastCorrectDate "+e.toString());}
  }      
@@ -218,7 +218,7 @@ running=false;
       try{ 
 //        logger.addlog("update aiis.iik_state set last_correct_date="+last_correct_date+" where iik_id="+meter_id);  
         Statement st=con.createStatement();
-        ResultSet rst=st.executeQuery("select last_correct_date from aiis.iik_state where iik_id="+meter_id);
+        ResultSet rst=st.executeQuery("select last_correct_date from aiisdatavalidator.iik_state where iik_id="+meter_id);
         if (rst.next())res=rst.getLong(1);
         st.close();
        }catch(Exception e){logger.addlog("MeterDataValidater getLastCorrectDate "+e.toString());}

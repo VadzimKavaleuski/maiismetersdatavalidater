@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "meterdatavalidator.fullname" . }}-test-connection"
+  labels:
+    {{- include "meterdatavalidator.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['{{ include "meterdatavalidator.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never
