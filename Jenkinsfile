@@ -1,7 +1,7 @@
 node {
   stage('Preparation') { 
     deleteDir()
-    git credentialsId: 'a29845c7-b29e-44ce-ab58-515727dba9ef',
+    git credentialsId: '7d276bfc-c963-43b8-8166-af5811a74803',
         url:'https://VadimKA1975@bitbucket.org/VadimKA1975/maiismetersdatavalidater.git'
   }
   stage('Build') {
