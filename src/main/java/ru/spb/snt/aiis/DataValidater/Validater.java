@@ -30,13 +30,15 @@ boolean ok=true;
                  logger.addlog("measure="+(measure==null?"null":measure.name));
                  if (!ok) break;
                      new MeterDataValidater(measure.id, measure.name).start();
-                 sleep(22*60*60*1000/mes.size());
+                 sleep(4*60*60*1000/mes.size());
+//                 sleep(22*60*60*1000/mes.size());
              }
             logger.addlog("stop scaning");
             logger.addlog("remove old data");
             RemoveHoles((System.currentTimeMillis()-(long)6*30*24*60*60*1000));
             logger.addlog("remove old data ok");
-           if (!ok)sleep(2*60*60*1000);
+             if (!ok)sleep(30*60*1000);
+//             if (!ok)sleep(2*60*60*1000);
          }catch(Exception e){
              logger.addlog("Validater run "+e.toString());}
         }
