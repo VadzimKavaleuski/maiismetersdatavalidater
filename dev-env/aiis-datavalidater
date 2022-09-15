@@ -1,7 +1,7 @@
 [MySql]
 Driver=com.mysql.jdbc.Driver
-Url=jdbc:mysql://mysql-prod-2-headless.mysql-prod.svc.cluster.local/aiisdatavalidator
-Urlutc=jdbc:mysql://mysql-prod-2-headless.mysql-prod.svc.cluster.local/aiisdatavalidator?useTimezone=false
+Url=jdbc:mysql://192.168.0.150/aiisdatavalidator
+Urlutc=jdbc:mysql://192.168.0.150/aiisdatavalidator?useTimezone=false
 User = aiis-datavalidater-login
 Password = aiis-datavalidater-password
 [Test]
