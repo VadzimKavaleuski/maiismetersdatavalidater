@@ -37,6 +37,7 @@ public void SetMySqlPassword(int val){
 public String getMySqlDriver(){
     return getSection("MySql").getString("Driver","com.mysql.jdbc.Driver");}
 public String getMySqlUrl(){
+    logger.addlog("getMySqlURL "+getSection("MySql").getString("Url"));
     return getSection("MySql").getString("Url","jdbc:mysql://127.0.0.1/aiis");}
 public int getPort(){
     return getSection("main").getInt("Port");}
