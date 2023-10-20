@@ -30,7 +30,7 @@ boolean ok=true;
                  logger.addlog("measure="+(measure==null?"null":measure.name));
                  if (!ok) break;
                      new MeterDataValidater(measure.id, measure.name).start();
-                 sleep(12*60*60*1000/mes.size());
+                 sleep(24*60*60*1000/mes.size());
 //                 sleep(22*60*60*1000/mes.size());
              }
             logger.addlog("stop scaning");
