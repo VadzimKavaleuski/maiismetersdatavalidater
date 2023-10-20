@@ -7,7 +7,7 @@
             name="jdbc/aiis4validator" 
             password="aiis4validator" 
             type="javax.sql.DataSource" 
-            url="jdbc:mysql:loadbalance://mysql-prod-1.mysql-prod.svc.cluster.local/aiisdatavalidator\,mysql-prod-2.mysql-prod.svc.cluster.local/aiisdatavalidator"
+            url="jdbc:mysql:loadbalance://mysql-prod-1.mysql-prod.svc.cluster.local/aiisdatavalidator,mysql-prod-2.mysql-prod.svc.cluster.local/aiisdatavalidator"
             username="aiis4validator"
             logAbandoned="true"
             maxWaitMillis="10000"
