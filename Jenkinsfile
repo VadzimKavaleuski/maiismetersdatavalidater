@@ -1,8 +1,8 @@
 node {
   stage('Preparation') { 
     deleteDir()
-    git credentialsId: '7d276bfc-c963-43b8-8166-af5811a74803',
-        url:'https://VadimKA1975@bitbucket.org/VadimKA1975/maiismetersdatavalidater.git'
+    git credentialsId: 'github.VadzimKavaleuski',
+        url:'git@github.com:VadzimKavaleuski/maiismetersdatavalidater.git'
   }
   stage('Build') {
     sh 'mvn  clean install'
