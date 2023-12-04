@@ -12,6 +12,7 @@ spec:
   - name: maven
     image: maven:3.9.5-sapmachine-11
     imagePullPolicy: Always
+    entrypoint: jenkins-agent
 """
   ) {
 
