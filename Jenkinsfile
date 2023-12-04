@@ -4,7 +4,7 @@ node {
     git credentialsId: 'github.VadzimKavaleuski',
         url:'git@github.com:VadzimKavaleuski/maiismetersdatavalidater.git'
   }
-
+}
 podTemplate(yaml: """
 kind: Pod
 spec:
@@ -24,6 +24,7 @@ spec:
 
     node(POD_LABEL) {
         stage('Build') {
+          sh 'ls -la'
           sh 'mvn  clean install'
         }
 
@@ -49,7 +50,7 @@ spec:
 
 
     }
-
+  }
 
 
 
@@ -74,7 +75,7 @@ spec:
   //     stash 'copy2docker'
   //   }  
   // }  
-}  
+// }  
 // node ('docker'){   
 //   stage('deploy') {
 //     deleteDir()
