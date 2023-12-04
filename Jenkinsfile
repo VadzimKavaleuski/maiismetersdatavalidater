@@ -4,27 +4,76 @@ node {
     git credentialsId: 'github.VadzimKavaleuski',
         url:'git@github.com:VadzimKavaleuski/maiismetersdatavalidater.git'
   }
-  stage('Build') {
-    sh 'mvn  clean install'
-  }
-  stage('prepare deploy') {
-    dir('deploy') {
-      sh 'ls'
-    }  
-    withCredentials([string(credentialsId: 'aiis-datavalidater-login', variable: 'aiis_datavalidater_login'),string(credentialsId: 'aiis-datavalidater-password', variable: 'aiis_datavalidater_password')]){
-      String confFile = readFile('dev-env/aiis-datavalidater')
-        .replaceAll('aiis-datavalidater-login',aiis_datavalidater_login)
-        .replaceAll('aiis-datavalidater-password',aiis_datavalidater_password)
-      writeFile file:'deploy/aiis-datavalidater', text: confFile
-    }  
-     sh 'cp dev-env/server.xml deploy/'
-     sh 'cp dev-env/tomcat.Dockerfile deploy/'
-    sh 'ls '
-    sh 'cp target/AIISDataValidater.war deploy/AIISDataValidater.war'
-    dir('deploy') {
-      stash 'copy2docker'
-    }  
-  }  
+
+podTemplate(yaml: """
+kind: Pod
+spec:
+  containers:
+  - name: maven
+    image: maven:3.9.5-sapmachine-11
+    imagePullPolicy: Always
+    command:
+    - sleep
+    args:
+    - 9999999
+    envVar:
+    - key: tagName
+      value: ${env.BRANCH_NAME}
+"""
+  ) {
+
+    node(POD_LABEL) {
+        stage('Build') {
+          sh 'mvn  clean install'
+        }
+
+        stage('prepare deploy') {
+          dir('deploy') {
+            sh 'ls'
+          }  
+          withCredentials([string(credentialsId: 'aiis-datavalidater-login', variable: 'aiis_datavalidater_login'),string(credentialsId: 'aiis-datavalidater-password', variable: 'aiis_datavalidater_password')]){
+            String confFile = readFile('dev-env/aiis-datavalidater')
+              .replaceAll('aiis-datavalidater-login',aiis_datavalidater_login)
+              .replaceAll('aiis-datavalidater-password',aiis_datavalidater_password)
+            writeFile file:'deploy/aiis-datavalidater', text: confFile
+          }  
+          sh 'cp dev-env/server.xml deploy/'
+          sh 'cp dev-env/tomcat.Dockerfile deploy/'
+          sh 'ls '
+          sh 'cp target/AIISDataValidater.war deploy/AIISDataValidater.war'
+          dir('deploy') {
+            stash 'copy2docker'
+          }  
+        }
+
+
+
+    }
+
+
+
+
+  // stage('Build') {
+  //   sh 'mvn  clean install'
+  // }
+  // stage('prepare deploy') {
+  //   dir('deploy') {
+  //     sh 'ls'
+  //   }  
+  //   withCredentials([string(credentialsId: 'aiis-datavalidater-login', variable: 'aiis_datavalidater_login'),string(credentialsId: 'aiis-datavalidater-password', variable: 'aiis_datavalidater_password')]){
+  //     String confFile = readFile('dev-env/aiis-datavalidater')
+  //       .replaceAll('aiis-datavalidater-login',aiis_datavalidater_login)
+  //       .replaceAll('aiis-datavalidater-password',aiis_datavalidater_password)
+  //     writeFile file:'deploy/aiis-datavalidater', text: confFile
+  //   }  
+  //    sh 'cp dev-env/server.xml deploy/'
+  //    sh 'cp dev-env/tomcat.Dockerfile deploy/'
+  //   sh 'ls '
+  //   sh 'cp target/AIISDataValidater.war deploy/AIISDataValidater.war'
+  //   dir('deploy') {
+  //     stash 'copy2docker'
+  //   }  
+  // }  
 }  
 // node ('docker'){   
 //   stage('deploy') {
