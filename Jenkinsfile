@@ -1,10 +1,10 @@
-node {
-  stage('Preparation') { 
-    deleteDir()
-    git credentialsId: 'github.VadzimKavaleuski',
-        url:'git@github.com:VadzimKavaleuski/maiismetersdatavalidater.git'
-  }
-}
+// node {
+//   stage('Preparation') { 
+//     deleteDir()
+//     git credentialsId: 'github.VadzimKavaleuski',
+//         url:'git@github.com:VadzimKavaleuski/maiismetersdatavalidater.git'
+//   }
+// }
 podTemplate(yaml: """
 kind: Pod
 spec:
@@ -16,12 +16,8 @@ spec:
     - sleep
     args:
     - 9999999
-    envVar:
-    - key: tagName
-      value: ${env.BRANCH_NAME}
 """
   ) {
-
     node(POD_LABEL) {
       stage('Preparation') { 
         deleteDir()
@@ -29,6 +25,7 @@ spec:
             url:'git@github.com:VadzimKavaleuski/maiismetersdatavalidater.git'
       }
       stage('Build') {
+        echo '${POD_LABEL}'
         sh 'ls -la'
         sh 'ls -la /usr/bin/mvn'
         sh '/usr/bin/mvn clean install'
@@ -52,9 +49,6 @@ spec:
           stash 'copy2docker'
         }  
       }
-
-
-
     }
   }
 
