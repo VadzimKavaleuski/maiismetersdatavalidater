@@ -19,8 +19,26 @@ spec:
 """
   ) {
     node(POD_LABEL) {
+      stage('Dependency preparation') { 
+        sh 'mkdir aiisutils'
+        dir('aiisutils') {
+          git credentialsId: 'github.VadzimKavaleuski',
+              url:'git@github.com:VadzimKavaleuski/mAIISUtils.git'
+        }
+      }
+      stage('Dependency Build') {
+        container('maven') {
+          dir('aiisutils') {
+            sh 'ls -la'
+            sh 'mvn clean install'
+          }
+        }
+      }
+
+
+
+
       stage('Preparation') { 
-        deleteDir()
         git credentialsId: 'github.VadzimKavaleuski',
             url:'git@github.com:VadzimKavaleuski/maiismetersdatavalidater.git'
       }
