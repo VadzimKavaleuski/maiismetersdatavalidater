@@ -25,10 +25,11 @@ spec:
             url:'git@github.com:VadzimKavaleuski/maiismetersdatavalidater.git'
       }
       stage('Build') {
-        echo '${POD_LABEL}'
-        sh 'ls -la'
-        sh 'ls -la /usr/bin/mvn'
-        sh '/usr/bin/mvn clean install'
+        container('maven') {
+          sh 'ls -la'
+          sh 'ls -la /usr/bin'
+          sh 'mvn clean install'
+        }
       }
 
       stage('prepare deploy') {
