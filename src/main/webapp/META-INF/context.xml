@@ -4,7 +4,7 @@
             driverClassName="com.mysql.cj.jdbc.Driver"
             maxTotal="-1"
             maxIdle="4"
-            name="aiis4validator" 
+            name="jdbc/aiis4validator" 
             password="aiis4validator" 
             type="javax.sql.DataSource" 
             url="//jdbc:mysql://mysql-prod-1.mysql-prod.svc.cluster.local/aiisdatavalidator"
