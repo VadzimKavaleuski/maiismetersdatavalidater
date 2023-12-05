@@ -30,8 +30,8 @@ spec:
       }
       stage('Build') {
         sh 'ls -la'
-        sh 'sleep 600'
-        sh 'mvn  clean install'
+        sh 'ls -la /usr/bin/mvn'
+        sh '/usr/bin/mvn clean install'
       }
 
       stage('prepare deploy') {
