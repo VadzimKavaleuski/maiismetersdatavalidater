@@ -6,7 +6,9 @@ import java.sql.Statement;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-import org.apache.commons.dbcp.BasicDataSource;
+
+import org.apache.commons.dbcp2.BasicDataSource;
+
 
 
 public class dbpool {
@@ -27,7 +29,7 @@ logger.addlog("init DB");
                 bds.setInitialSize(5);
                 bds.setMinIdle(5);
                 bds.setMaxIdle(10);
-                bds.setMaxActive(-1);
+                // bds.setMaxActive(-1);
                 bds.setDriverClassName(configINI.getMySqlDriver());
                 bds.setUsername(configINI.getMySqlUser());
                 bds.setPassword(configINI.getMySqlPassword());
