@@ -19,6 +19,10 @@ spec:
 """
   ) {
     node(POD_LABEL) {
+      stage('Preparation') { 
+        git credentialsId: 'github.VadzimKavaleuski',
+            url:'git@github.com:VadzimKavaleuski/maiismetersdatavalidater.git'
+      }
       stage('Dependency preparation') { 
         sh 'mkdir aiisutils'
         dir('aiisutils') {
@@ -38,10 +42,7 @@ spec:
 
 
 
-      stage('Preparation') { 
-        git credentialsId: 'github.VadzimKavaleuski',
-            url:'git@github.com:VadzimKavaleuski/maiismetersdatavalidater.git'
-      }
+
       stage('Build') {
         container('maven') {
           sh 'ls -la'
