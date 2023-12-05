@@ -40,8 +40,6 @@ spec:
 
       stage('Build') {
         container('maven') {
-          sh 'ls -la'
-          sh 'ls -la /root/.m2/repository/ru/spb/snt/AIISUtils/0/'
           sh 'mvn clean install'
         }
       }
