@@ -30,6 +30,7 @@ spec:
       }
       stage('Build') {
         sh 'ls -la'
+        sh 'sleep 600'
         sh 'mvn  clean install'
       }
 
