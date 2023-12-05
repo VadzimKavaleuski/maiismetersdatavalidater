@@ -12,7 +12,13 @@ spec:
   - name: maven
     image: maven:3.9.5-sapmachine-11
     imagePullPolicy: Always
-    entrypoint: jenkins-agent
+    command:
+    - sleep
+    args:
+    - 9999999
+    envVar:
+    - key: tagName
+      value: ${env.BRANCH_NAME}
 """
   ) {
 
