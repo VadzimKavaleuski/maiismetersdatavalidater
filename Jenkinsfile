@@ -23,20 +23,20 @@ spec:
         git credentialsId: 'github.VadzimKavaleuski',
             url:'git@github.com:VadzimKavaleuski/maiismetersdatavalidater.git'
       }
-      stage('Dependency preparation') { 
-        sh 'mkdir aiisutils'
-        dir('aiisutils') {
-          git credentialsId: 'github.VadzimKavaleuski',
-              url:'git@github.com:VadzimKavaleuski/mAIISUtils.git'
-        }
-      }
-      stage('Dependency Build') {
-        container('maven') {
-          dir('aiisutils') {
-            sh 'mvn clean install'
-          }
-        }
-      }
+      // stage('Dependency preparation') { 
+      //   sh 'mkdir aiisutils'
+      //   dir('aiisutils') {
+      //     git credentialsId: 'github.VadzimKavaleuski',
+      //         url:'git@github.com:VadzimKavaleuski/mAIISUtils.git'
+      //   }
+      // }
+      // stage('Dependency Build') {
+      //   container('maven') {
+      //     dir('aiisutils') {
+      //       sh 'mvn clean install'
+      //     }
+      //   }
+      // }
 
       stage('Build') {
         container('maven') {
