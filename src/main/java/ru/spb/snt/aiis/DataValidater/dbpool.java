@@ -1,15 +1,13 @@
 package ru.spb.snt.aiis.DataValidater;
 
+import org.apache.commons.dbcp.BasicDataSource;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-
-import org.apache.commons.dbcp2.BasicDataSource;
-
-
 
 public class dbpool {
 static Context ctx=null;//new InitialContext();
