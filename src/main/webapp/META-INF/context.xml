@@ -1,15 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context antiJARLocking="true" path="/AIISMetersDataValidater">
-  <Resource auth="Container" 
-            driverClassName="com.mysql.cj.jdbc.Driver"
-            maxTotal="-1"
-            maxIdle="4"
-            name="jdbc/aiis4validator" 
-            password="aiis4validator" 
-            type="javax.sql.DataSource" 
-            url="//jdbc:mysql://mysql-prod-1.mysql-prod.svc.cluster.local/aiisdatavalidator"
-            username="aiis4validator"
-            logAbandoned="true"
-            maxWaitMillis="10000"
-  />
+
 </Context>
